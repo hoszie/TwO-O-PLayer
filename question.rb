@@ -1,11 +1,12 @@
+require_relative "player"
 class Question
 
   ARR = *(1..20)
-  OPERATORS = ['+', '-', '/', '*']
+  OPERATORS = [:+, :-, :*]
 
   def initialize 
-    self.answer = 0
-    self.question = ""
+    @answer = 0
+    @question = ""
   end
 
   def generate_question
@@ -13,14 +14,15 @@ class Question
     num2 = ARR.sample
     operator = OPERATORS.sample
     
-    self.question = "What is #{num1} #{operator} #{num2}? To two decimal places if necessary"
+    @answer = num1.send(operator, num2)
+    @question = "What is #{num1} #{operator} #{num2}?"
 
-    self.answer = "#{}"
   end
 
   def is_correct?(input)
-    if input != answer
+    if input != @answer
       puts "Huh? No, #{input} is wrong dude."
+      # @score --
       false
     else
       puts "Yea, noice one."

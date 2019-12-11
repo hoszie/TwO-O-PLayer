@@ -10,4 +10,8 @@ class Player
     @score < 1
   end
 
+  def wrong_answer
+    @score = @score - 1
+  end
+
 end
